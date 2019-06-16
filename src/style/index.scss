@@ -1,0 +1,30 @@
+@import 'loader';
+@import 'view';
+@import 'comment';
+
+.submission{
+    padding: 1em;
+    transition: box-shadow 0.2s ease-in-out;
+    margin-bottom: 1em;
+
+    &:hover{
+        -webkit-box-shadow: 0px 0px 3px 3px rgba(212,193,212,1);
+        -moz-box-shadow: 0px 0px 3px 3px rgba(212,193,212,1);
+        box-shadow: 0px 0px 3px 3px rgba(212,193,212,1);
+      }
+      img{
+        width: 100%;
+        height: 100%;  
+      }
+  }  
+  .submission-link:hover{
+    text-decoration: none;
+  }
+  .media_embed iframe{
+    width: 100%;
+  }
+
+  .thumbnail.default {
+    background: url("//b.thumbs.redditmedia.com/XWINAyK1fHqmkcRwoZGwsASV7l6fl_cRG_5u_o9Dwqk.png") -143px -80px;
+  }
+  

@@ -1,0 +1,27 @@
+.loader {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    position: fixed;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    background-color: #444;
+    opacity: 0.5;
+    flex-direction: column;
+    justify-content: center;
+
+    & .loader-spinner {
+        width: 35px;
+        height: 35px;
+        padding: 20px;
+      
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      
+        margin: -38px 0 0 -38px;
+    }
+}
+
