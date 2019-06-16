@@ -12,7 +12,6 @@ insert your token and client id in the configuration file found in
     
     ROOT/src/config/config.dev.js
 
-
 Example:
 
     const config = {
@@ -25,6 +24,10 @@ Example:
             subreddit: 'photography'
         }
     }
+
+if you dont have access token, generate one here
+
+    https://not-an-aardvark.github.io/reddit-oauth-helper/
 
 you can also assign a default subreddit in the configuration file.
 

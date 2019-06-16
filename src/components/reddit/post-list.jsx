@@ -16,18 +16,22 @@ class PostList extends React.Component
         return (
             <div>
                 {
-                hasPosts ? (
-                    <Row>
-                        {posts.map ((post,key)=>
-                        (<Col xs={12} key={key}>
-                            <PostListItem post={post} />
-                        </Col>)  
-                        )}
-                    </Row>
-                )
-                : (
-                    <h2>No post to display</h2>
-                )
+                    this.props.isFetching ?(
+                        <h2>Loading...</h2>
+                    )
+                    :
+                    hasPosts ? (
+                        <Row>
+                            {posts.map ((post,key)=>
+                            (<Col xs={12} key={key}>
+                                <PostListItem post={post} />
+                            </Col>)  
+                            )}
+                        </Row>
+                    )
+                    : (
+                        <h2>No post to display</h2>
+                    )
                 }
             </div>
         );
@@ -36,7 +40,8 @@ class PostList extends React.Component
 
 const mapStateToProps = state =>{
     return {
-        posts: state.post.posts
+        posts: state.post.posts,
+        isFetching: state.post.isFetching
     }
 }   
 

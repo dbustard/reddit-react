@@ -12,18 +12,21 @@ const PostView = props =>{
             <div>loading...</div>
         )
     }
-
+    
     const id = props.match.params.id;
     if (!props.post || props.post.id !== id){
         props.fetchPost(id);
         return null;
     }
 
-    const {title,is_self, selftext_html, media_embed, url} =  props.post || {} ;
+    console.log('props.post', props.post);
+
+    const {title,is_self, selftext_html, media_embed, url, created, author, permalink} =  props.post || {} ;
     const html = is_self ? ReactHtmlParser(selftext_html) : null;
     const media = media_embed ? ReactHtmlParser(media_embed.content) : null;
-    const comments = props.post && props.post.comments && props.post.comments.length > 0 ? props.post.comments : [];
-    const posted = new Date(props.post.created).toISOString().split('T')[0];
+    const comments = props.post.comments && props.post.comments.length > 0 ? props.post.comments : [];
+    const posted = new Date(created).toISOString().split('T')[0];
+    const isImage = url.match(/.(jpg|jpeg|png|gif)$/i);
 
     return(
     <div className="post-view">
@@ -33,7 +36,7 @@ const PostView = props =>{
                     <Card.Body>
                         <Row>
                             <Col xs={8}>
-                                Posted by u/{props.post.author.name} on {posted}
+                                Posted by u/{author.name} on {posted}
                             </Col>
                             <Col xs={4} className="text-right">
                                 <div  className='options'>
@@ -43,7 +46,7 @@ const PostView = props =>{
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu>
-                                            <Dropdown.Item  as={Clipboard} data-clipboard-text={props.post.url} onSuccess={()=>{alert('Copied link!')}}>Copy in clipboard</Dropdown.Item>
+                                            <Dropdown.Item  as={Clipboard} data-clipboard-text={`https://reddit.com${permalink}`} onSuccess={()=>{alert('Copied link!')}}>Copy link</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </div>
@@ -60,15 +63,21 @@ const PostView = props =>{
                                 </div>
                             }
 
-                            {media && url && 
-                                <div className="media_embed">
-                                    <div>
-                                        <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
-                                    </div>
+                            {url && !is_self &&
+                                <a href={url} target="_blank" rel="noopener noreferrer" >{url}</a>
+                            }
 
+                            {media && 
+                                <div className="media_embed">
                                     <div>
                                         {media}
                                     </div>
+                                </div>
+                            }
+
+                            { isImage &&
+                                <div className="image_embed">
+                                    <img src={url} alt={title} />
                                 </div>
                             }
 
